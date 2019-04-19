@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <title>TradingView Charting Library demo -- testing mess</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <script type="text/javascript" src="../charting_library/charting_library.min.js"></script>
+    <script type="text/javascript" src="../datafeeds/udf/dist/polyfills.js"></script>
+    <script type="text/javascript" src="../datafeeds/udf/dist/bundle.js"></script>
+    <script src="../js/tv.js"></script>
+    <script type="text/javascript">
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        TradingView.onready(function () {
+            var udf_datafeed = new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com");
+            var widget = new TradingView.widget(
+                {
+                    "container_id": "tv_chart_container",
+                    "datafeed": udf_datafeed,
+                    "autosize": true,
+                    "symbol": "NASDAQ:AAPL",
+                    "interval": "D",
+                    "timezone": "Asia/Shanghai",
+                    "theme": "Light",
+                    "style": "1",
+                    "locale": "zh_CN",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "save_image": false,
+                    "studies": [
+                        "Volume@tv-basicstudies",
+                        "MACD@tv-basicstudies",
+                    ],
+                    "disabled_features":[
+                        "save_chart_properties_to_local_storage",
+                        "use_localstorage_for_settings",
+                        "volume_force_overlay",
+                        "scales_context_menu",
+                        "timezone_menu",
+                        "left_toolbar",
+                        "header_symbol_search",
+                        "header_chart_type",
+                        "header_settings",
+                        "header_indicators",
+                        "header_compare",
+                        "go_to_date",
+                        "timeframes_toolbar",
+                        "move_logo_to_main_pane",
+                        "show_logo_on_all_charts",
+                        "adaptive_logo",
+                        "edit_buttons_in_legend",
+                        "legend_context_menu",
+                        "dont_show_boolean_study_arguments"
+                    ]
+                })
+        });
+    </script>
+</head>
+
+<body style="margin:0;">
+<div id="tv_chart_container" style="height: 800px"></div>
+</body>
+
+</html>

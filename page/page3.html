@@ -1,0 +1,61 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>TradingView Charting Library demo -- testing mess</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <script type="text/javascript" src="../charting_library/charting_library.min.js"></script>
+    <script type="text/javascript" src="../datafeeds/udf/dist/polyfills.js"></script>
+    <script type="text/javascript" src="../datafeeds/udf/dist/bundle.js"></script>
+    <script src="../js/tv.js"></script>
+    <script type="text/javascript">
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+        TradingView.onready(function () {
+            var udf_datafeed = new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com");
+            var widget = new TradingView.widget(
+                {
+                    fullscreen: true,
+                    container_id: "tv_chart_container",
+                    datafeed: udf_datafeed,
+                    
+                    locale: getParameterByName('lang') || "en",
+                    drawings_access: { type: 'black', tools: [{ name: "Regression Trend" }] },
+                   
+                    symbol: "A",
+                    interval: "D",
+                    timezone: "exchange",
+                    theme: "Dark",
+                    style: "1",
+                    toolbar_bg: "#000000",
+                    withdateranges: true,
+                    hide_side_toolbar: false,
+                    allow_symbol_change: true,
+                    save_image: false,
+                    is_hidden_study: false,
+                    studies: [
+                        "Volume@tv-basicstudies"
+                    ],
+                    disabled_features: ["save_chart_properties_to_local_storage", "volume_force_overlay"],
+                    enabled_features: ["move_logo_to_main_pane", "study_templates"],
+                 
+                    show_popup_button: true,
+                    popup_width: "1000",
+                    popup_height: "650"
+                })
+        });
+    </script>
+</head>
+
+<body style="margin:0;">
+    <div id="tv_chart_container"></div>
+</body>
+
+</html>

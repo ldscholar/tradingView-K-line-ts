@@ -1,0 +1,40 @@
+﻿<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div id="tradingview_7f736"></div>
+    <div class="tradingview-widget-copyright">
+        <a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank">
+            <span class="blue-text">AAPL chart</span>
+        </a> 
+        by TradingView
+    </div>
+    <script type="text/javascript" src="../charting_library/charting_library.min.js"></script>
+    <script type="text/javascript" src="../datafeeds/udf/dist/polyfills.js"></script>
+    <script type="text/javascript" src="../datafeeds/udf/dist/bundle.js"></script>
+    <script type="text/javascript">
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+        var udf_datafeed = new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com");
+        new TradingView.widget(
+            {
+                datafeed: udf_datafeed,
+                width: 980,
+                height: 610,
+                symbol: "NASDAQ:AAPL",
+                interval: "D",
+                timezone: "Etc/UTC",
+                theme: "Light",
+                style: "1",
+                locale: "en",
+                toolbar_bg: "#f1f3f6",
+                enable_publishing: false,
+                allow_symbol_change: true,
+                container_id: "tradingview_7f736"
+            }
+        );
+    </script>
+</div>
+<!-- TradingView Widget END -->
